@@ -1,0 +1,51 @@
+VideoForge Editor 0.10.3 — tối ưu tốc độ xuất, giữ bản sửa hàng chờ 0.10.2
+
+1. Đóng VideoForge Editor.
+2. Giải nén ZIP, mở thư mục VideoForgeEditor_0.10.3_CrossPlatform.
+3. Chép toàn bộ NỘI DUNG bên trong vào C:\VideoForge, chọn Replace the files.
+   CMakeLists.txt phải ở C:\VideoForge, src ở C:\VideoForge\src.
+   Giữ build-dev, ffmpeg.exe và ffprobe.exe đang chạy tốt.
+   Không chép mã nguồn vào build-dev; không lồng thêm thư mục project.
+4. Mở x64 Native Tools Command Prompt for VS 2022 (CMD), chạy từng dòng:
+
+cd /d C:\VideoForge
+set "PATH=C:\Qt\Tools\Ninja;C:\Qt\Tools\CMake_64\bin;C:\Qt\6.11.2\msvc2022_64\bin;C:\ffmpeg\bin;%PATH%"
+findstr /C:"VERSION 0.10.3" CMakeLists.txt
+cmake -S . -B build-dev
+cmake --build build-dev --clean-first --parallel
+build-dev\VideoForgeEditor.exe
+
+Dòng findstr phải hiện VERSION 0.10.3. Nếu chưa có, kiểm tra bước chép nguồn.
+--clean-first buộc biên dịch lại để tránh timestamp trong ZIP khiến Ninja báo
+"no work to do"; không cần xóa toàn bộ build-dev.
+
+Nếu chưa có build-dev, thay lệnh configure bằng:
+cmake -S . -B build-dev -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="C:\Qt\6.11.2\msvc2022_64"
+Sau build lần đầu, chạy trước khi mở ứng dụng:
+windeployqt --release --compiler-runtime build-dev\VideoForgeEditor.exe
+
+Sửa đường dẫn Qt/project nếu máy bạn dùng đường dẫn khác.
+ZIP chứa mã nguồn; không kèm Qt, FFmpeg hoặc EXE Windows đã biên dịch.
+
+KIỂM TRA XUẤT:
+- Dòng "Range renderer" xác nhận cơ chế seek/cắt đoạn của 0.10.2 còn hoạt động.
+- Dòng "Render pipeline" cho biết số luồng lọc, ảnh được tái sử dụng và lớp
+  video dùng đường xử lý gọn. Số lượng bằng 0 có thể hoàn toàn bình thường,
+  tùy nguồn, tỉ lệ khung và hiệu ứng.
+- Dòng "Platform encoder" cho biết encoder THỰC SỰ đang chạy:
+  h264_nvenc = NVIDIA; h264_qsv = Intel; h264_amf = AMD; libx264 = CPU.
+- Dòng "Encode settings" cho biết preset/CRF hoặc bitrate đang sử dụng.
+- Nếu GPU khả dụng, bật Hardware H.264 / Prefer hardware encoder khi THÊM
+  tác vụ. Các tác vụ đã có giữ lựa chọn CPU/GPU lúc thêm vào hàng chờ.
+- Phần giải mã và ghép hình vẫn chạy CPU; lựa chọn hardware encoder chỉ
+  tăng tốc mã hóa. Không cam kết nhanh bằng Premiere trên mọi máy.
+
+SO SÁNH VỚI PREMIERE:
+Dùng cùng đoạn nguồn, độ phân giải, fps, lớp nền/FX và phạm vi xuất. Ghi lại
+codec, bitrate/cách kiểm soát chất lượng và CPU/GPU encoder của cả hai bên.
+Chạy lại mỗi bên vài lần, ghi tổng thời gian. Gửi tên CPU/GPU, hai thời gian,
+ảnh thiết lập Premiere và các dòng Platform encoder / Encode settings /
+Render pipeline nếu cần phân tích tiếp.
+
+Đã kiểm tra trên Linux/Qt 6.4.2/FFmpeg 6.1.1; chưa xác minh native Windows
+hoặc GPU thực tế trên máy bạn. Xem RENDER_PERFORMANCE_REPORT.md.

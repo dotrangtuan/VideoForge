@@ -1,0 +1,127 @@
+VideoForge Editor 0.10.3 — cập nhật Windows
+
+ĐƯA NHIỀU VIDEO V2 VÀO HÀNG CHỜ:
+1. Mở tab Export > Add V2 Videos to Queue...
+2. Chọn First videos rồi nhập số lượng từ 1 đến tổng số clip video trên V2, hoặc chọn All videos on V2.
+3. Danh sách xem trước sắp theo trái sang phải trên timeline, hiển thị tên, điểm bắt đầu và thời lượng.
+4. Chọn Output folder để lưu các MP4. Kích thước và fps theo Sequence Settings; có thể chọn hardware/CPU trong hộp này.
+5. Bấm Add to Queue. Mỗi clip V2 tạo một tác vụ với khoảng thời gian của chính clip đó, gồm nền V1, các lớp hình/âm thanh còn lại và FX đúng trạng thái hiện tại. In/Out đang chọn ở editor không giới hạn các tác vụ này.
+6. Bấm Start / Resume ở hàng chờ để bắt đầu. Nếu hàng chờ đang chạy, tác vụ mới nối vào cuối danh sách Pending.
+
+- Thời lượng theo clip V2 sau trim; khoảng trống giữa các clip không được thêm vào video. Điểm đầu/cuối căn theo frame nên thời lượng có thể lệch dưới một frame so với số mili giây.
+- Tên MP4 theo tên clip V2; trùng tên hoặc file đã tồn tại sẽ thêm (2), (3)... Ký tự không hợp lệ được thay thế. Không ghi đè file cũ hay file nguồn.
+- Chỉ đếm clip video trên V2, không đếm ảnh hoặc audio-only. Clip đã Split được tính thành các clip riêng.
+- Nền chỉ xuất ở phần thực sự có trên V1 trong khoảng của clip V2; không tự lặp hoặc kéo dài nền. Track ẩn/tắt tiếng vẫn được tôn trọng.
+- Giới hạn hàng chờ 100 tác vụ, kể cả đã hoàn tất. Nếu không đủ chỗ, hãy xóa tác vụ cũ hoặc chọn ít video hơn. Cả đợt được thêm một lần, không để lại một phần khi báo lỗi.
+- Tác vụ giữ bản chụp chỉnh sửa lúc thêm. Không di chuyển/xóa file nguồn trước khi xuất xong.
+- Bản 0.10.2 bỏ xử lý phần timeline trước In: chỉ mở clip giao với đoạn xuất và seek tới phần nguồn cần dùng. Vẫn có thời gian mở file/encoder; có thể Cancel.
+
+NHẬP NỐI TIẾP RIÊNG CHO HAI TRACK:
+- Video gốc nối tiếp nhau từ cuối V2; file nền nối tiếp nhau từ cuối V1. Track trống bắt đầu ở 0.
+- Không lặp nền, cắt phần dư, kéo dài ảnh hay căn độ dài hai track cho khớp nhau.
+- Video dùng nguyên thời lượng gốc. Mỗi ảnh nền mặc định 10 giây, kể cả chỉ chọn một ảnh.
+- Ví dụ V2 dài 20 giây và V1 dài 8 giây: lần nhập mới nối vào giây 20 trên V2, giây 8 trên V1.
+- Chỉ áp dụng cho lần nhập mới; project và clip đã sắp xếp trước đó giữ nguyên. Muốn thay phần nền đã tự lặp ở bản cũ, xóa các clip đó rồi nhập lại.
+- Xuất toàn timeline vẫn theo clip kết thúc muộn nhất; dùng In/Out nếu muốn xuất đoạn ngắn hơn.
+
+XÓA TÀI NGUYÊN:
+- Trong Resources, bấm Remove All Resources để xóa toàn bộ danh sách tài nguyên.
+- Chọn một hoặc nhiều tài nguyên (Ctrl/Shift) rồi nhấn Delete để xóa phần đang chọn.
+- Nếu tài nguyên đang được dùng trên timeline, hộp hỏi hiển thị số tài nguyên và số clip bị ảnh hưởng. No hoặc Escape giữ nguyên; Yes xóa tài nguyên và TẤT CẢ clip dùng file đó trên mọi track. Những clip còn lại không bị dịch chuyển.
+- Tài nguyên chưa dùng trên timeline được xóa trực tiếp, không hiện hộp hỏi.
+- File gốc trên ổ đĩa và các tác vụ export đã đưa vào hàng đợi được giữ nguyên.
+- Thay đổi được lưu cùng project/autosave. Nút xóa toàn bộ bị vô hiệu khi danh sách trống.
+- Undo khôi phục các clip vừa xóa trên timeline trong một bước; chưa khôi phục mục Resources. Dùng Import Media để thêm lại file vào Resources.
+- Khi focus ở timeline, Delete vẫn chỉ xóa clip được chọn như trước.
+
+CỘT RESOURCES RIÊNG:
+- Media giữ phần chọn chế độ, thiết lập chèn nền và nút Import Media.
+- Resources ở ngay bên cạnh hiển thị các tài nguyên đã nạp, với danh sách cao hết phần trống của cột.
+- Chọn file rồi bấm Add to Timeline trong Resources, nhấp đúp hoặc kéo file vào timeline như trước. Ctrl/Shift vẫn chọn được nhiều file.
+- Kéo đường phân cách giữa các cột để chỉnh độ rộng. Resources luôn hiện ở cả hai chế độ edit.
+- Thanh tua và timecode nằm trên một hàng riêng dưới preview; các nút phát/chỉnh sửa nằm ở hàng kế tiếp.
+
+TIMECODE VÀ THƯỚC TIMELINE:
+- Preview hiển thị vị trí hiện tại / tổng thời lượng theo Giờ:Phút:Giây:Khung hình (HH:MM:SS:FF).
+- Ví dụ 00:01:12:15 = 1 phút, 12 giây, khung hình 15. Phần Frames bắt đầu từ 00 và đếm theo timebase trong Sequence Settings.
+- Timeline có vạch lớn/nhỏ, nhãn timecode tự giãn theo Zoom và đường chuẩn vàng xanh. Zoom gần chia đến từng khung hình khi đủ chỗ; Fit vẫn hiện toàn bộ timeline.
+- Dùng non-drop-frame: ở 23.976/29.97/59.94 fps, nhãn đếm theo 24/30/60 nhưng vị trí vẫn tính theo fps thực. Timecode có thể khác thời gian đồng hồ; chưa có tùy chọn drop-frame.
+- Ô nhập In/Out và tiến độ export vẫn tính bằng giây. Đây là đổi hiển thị, không thay tốc độ clip hay thông số xuất.
+
+CHẾ ĐỘ CHÈN NỀN:
+1. Trong Media, đổi Standard edit sang Background composition.
+2. Bấm Original videos... (V2), chọn nhiều video gốc bằng Ctrl/Shift.
+3. Bấm Background files... (V1), chọn nhiều video/ảnh nền. Có thể chọn nền trước.
+4. Sau khi chọn đủ hai bên, app nối gốc vào cuối V2 và nền vào cuối V1, mỗi track độc lập.
+5. Mỗi ảnh nền dùng 10 giây. Video dùng nguyên độ dài gốc. Mỗi file được thêm đúng một lần, không tính toán để khớp hai track.
+6. Nền mặc định im tiếng. Tích Background audio để bật tiếng các clip nền; track Mute vẫn có ưu tiên.
+7. Video gốc giữ nguyên kích thước. Dùng Video FX > Zoom/Crop nếu muốn lộ nền xung quanh.
+8. Đổi lại Standard edit không xóa timeline. Thêm nhóm mới và đổi tiếng nền đều Undo/Redo được.
+Các clip được nối theo thứ tự file trả về từ hộp chọn; sau đó có thể chỉnh sửa độc lập.
+
+XUẤT TOÀN BỘ HOẶC MỘT ĐOẠN:
+- Tab Export: chọn Entire timeline hoặc In / Out range.
+- Di chuyển playhead rồi bấm Set In / Set Out, hoặc gõ số giây. Khi focus ở timeline, dùng phím I / O.
+- Điểm Out là giới hạn không bao gồm frame ở vị trí Out. Điểm được căn theo frame.
+- Vùng chọn được đánh dấu xanh trên timeline; thời lượng xuất hiển thị ngay bên dưới.
+- Hộp Add to Export Queue cũng cho chọn toàn bộ/đoạn riêng cho mỗi tác vụ.
+- Tác vụ giữ nguyên vùng xuất tại thời điểm thêm vào hàng đợi.
+- Range được lưu cùng project/autosave; project cũ vẫn mở được. Project lưu bằng 0.9.0 cần 0.9.0 để mở lại.
+- Bộ xuất dùng mốc thời gian riêng cho đoạn In/Out, giữ fade theo vị trí trong clip gốc; Cancel vẫn hoạt động.
+
+CẬP NHẬT: chép toàn bộ nội dung trong thư mục VideoForgeEditor_0.10.3_CrossPlatform của ZIP
+vào thư mục project cũ, gồm cả CMakeLists.txt và các file src mới. Không lồng thêm một thư mục project con.
+
+TIMELINE FIT:
+- Kéo Zoom hết sang trái, bấm Fit hoặc Ctrl+Shift+F để thấy từ đầu đến cuối sequence.
+- Tính theo clip kết thúc muộn nhất trên cả 5 track, kể cả track ẩn/tắt tiếng.
+- Tự tính lại khi thay đổi độ dài sequence hoặc kích thước cửa sổ.
+- Mốc thời gian tự giãn để dễ đọc. Project mới mặc định Fit.
+- Khi kéo clip, tỷ lệ giữ nguyên cho đến khi thả chuột.
+- Project cũ vẫn mở được; tỷ lệ zoom nay phụ thuộc cửa sổ và độ dài sequence.
+
+Giữ nguyên ffmpeg.exe và ffprobe.exe 7.1.1 đang chạy tốt trong build-dev.
+ZIP này chỉ chứa mã nguồn và tài liệu, không chứa hoặc thay thế FFmpeg.
+
+1. Đóng VideoForge.
+2. Giải nén ZIP rồi chép toàn bộ src, scripts, tests, CMakeLists.txt và tài liệu vào project đang dùng, ghi đè source. Phải chép cả các file source mới. Giữ nguyên build-dev.
+3. Mở Developer PowerShell for VS 2022 (x64), chạy tại project:
+
+cd "C:\Users\Admin\Downloads\VideoForgeEditor_0.3.0_CrossPlatform"
+$env:Path = "C:\Qt\Tools\Ninja;C:\Qt\Tools\CMake_64\bin;C:\Qt\6.11.2\msvc2022_64\bin;$env:Path"
+cmake --build build-dev --parallel
+.\build-dev\VideoForgeEditor.exe
+
+Đổi đường dẫn nếu project hiện tại nằm ở nơi khác. Nếu giải nén thành thư mục mới, configure một lần theo README.md trước khi build. ZIP gồm source; không kèm Qt, FFmpeg hoặc bản chạy độc lập.
+
+Sử dụng Batch Export:
+1. Mở tab Export > Add to Export Queue...
+2. Chọn tên tác vụ, tên file MP4 mới, kích thước khung hình, fps và hardware/CPU.
+3. Bấm Add to Queue. Mỗi tác vụ giữ timeline/FX/âm thanh ở thời điểm thêm; sửa project sau đó không đổi tác vụ cũ.
+4. Thêm các bản xuất khác rồi bấm Start / Resume trong cửa sổ hàng đợi.
+5. Export / Start Queue... vừa thêm tác vụ vừa bắt đầu xuất tất cả tác vụ Pending theo thứ tự.
+
+Các nút:
+- Cancel current: hủy tác vụ hiện tại, tiếp tục tác vụ kế tiếp.
+- Stop queue: hủy tác vụ hiện tại và dừng hàng đợi; các tác vụ chưa chạy vẫn Pending.
+- Retry using CPU: đưa tác vụ Failed / Cancelled / Interrupted về Pending, dùng CPU. Bấm Start nếu đang dừng. Tác vụ sẽ xuất lại từ đầu.
+- Change output...: đổi tên file của tác vụ chưa hoàn tất; không đổi nội dung đã chụp.
+- Up / Down: đổi thứ tự hai tác vụ Pending cạnh nhau.
+- Remove job: xóa dòng khỏi hàng đợi, không xóa video đã xuất.
+
+Mỗi tác vụ hiển thị trạng thái, phần trăm; chọn dòng để xem đường dẫn, log, thời gian đã chạy, ước tính còn lại và tốc độ. Tác vụ lỗi không chặn các tác vụ tiếp theo.
+
+Hàng đợi tự lưu ngoài file project. Đóng cửa sổ hàng đợi thì export vẫn chạy. Đóng cả VideoForge thì export bị gián đoạn; mở lại chọn Retry cho tác vụ Interrupted rồi Start. Bản này chưa xuất tiếp khi app đã đóng, chưa phải app Encoder riêng.
+
+Đường dẫn lưu hàng đợi thường là:
+%LOCALAPPDATA%\VideoForge\VideoForge Editor\export-queue\queue.json
+
+Chỉ một phiên VideoForge được quản lý hàng đợi này. Giới hạn 100 tác vụ kể cả các tác vụ hoàn tất; xóa lịch sử cũ bằng Remove job nếu cần.
+
+Không ghi đè file đã tồn tại, kể cả khi file xuất hiện trong lúc đang chờ xuất. Hãy chọn tên mới. Media nguồn vẫn được tham chiếu theo đường dẫn, không sao chép vào hàng đợi; đừng di chuyển/xóa/thay nguồn trước khi xuất xong.
+
+Thông số xuất riêng không làm đổi Sequence Settings của editor. Đổi ngang sang dọc chỉ fit theo khung mới, không tự chọn lại bố cục. Ngoài thêm sequence, bản 0.10.0 hỗ trợ xuất riêng từng clip V2 kèm nền theo hướng dẫn ở đầu file; chưa chọn hàng loạt file project.
+
+Nếu đóng app bất thường có thể còn file .part.mp4 cạnh đích; đó là file tạm, không phải video xuất hoàn tất. Hàng đợi hỏng được giữ nguyên và không bị ghi đè. Sao lưu rồi chuyển queue.json hỏng ra chỗ khác, mở lại để tạo hàng đợi mới.
+
+Các tính năng FX, lưu project, autosave, Sequence Settings và hàng đợi xuất được giữ nguyên. Windows MSVC/Qt 6.11.2 đã kiểm thử; macOS và tải nặng kéo dài chưa được kiểm thử. Xem TEST_REPORT.md.

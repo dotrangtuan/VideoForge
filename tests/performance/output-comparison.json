@@ -1,0 +1,30 @@
+[
+  {
+    "scenario": "single",
+    "ssim": 1.0,
+    "frames": 180,
+    "fps": "30/1",
+    "decoded_audio_identical": true
+  },
+  {
+    "scenario": "still",
+    "ssim": 0.996918,
+    "frames": 180,
+    "fps": "30/1",
+    "decoded_audio_identical": true
+  },
+  {
+    "scenario": "blur",
+    "ssim": 0.996832,
+    "frames": 180,
+    "fps": "30/1",
+    "decoded_audio_identical": true
+  },
+  {
+    "scenario": "video",
+    "ssim": 0.996841,
+    "frames": 180,
+    "fps": "30/1",
+    "decoded_audio_identical": true
+  }
+]
